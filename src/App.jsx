@@ -5,7 +5,9 @@ const App = () => {
   const [colorType, setColorType] = useState("HEX");
   const [HexColor, setHexColor] = useState("");
   const [RGBColor, setRGBColor] = useState("");
+  const [showBtn, setShowBtn] = useState(false);
   const generatHex = () => {
+    setShowBtn(true);
     setColorType("HEX");
     const hexLetters = [
       1,
@@ -36,6 +38,8 @@ const App = () => {
   };
 
   const generatRGB = () => {
+    setShowBtn(true);
+
     setColorType("RGB");
     const x = Math.floor(Math.random() * 256);
 
@@ -77,14 +81,17 @@ const App = () => {
       <h1 className="text-white font-bold text-3xl my-12">
         {colorType === "HEX" ? "HEX" : "RGB"} Color
       </h1>
-      <h2
-        onClick={() =>
-          copyToclipBored(colorType === "HEX" ? HexColor : RGBColor)
-        }
-        className="text-white font-bold text-3xl my-18"
-      >
+      <h2 className="text-white font-bold text-3xl my-18">
         {colorType === "HEX" ? HexColor : RGBColor}
       </h2>
+      {showBtn && (
+        <Button
+          generateColor={() =>
+            copyToclipBored(colorType === "HEX" ? HexColor : RGBColor)
+          }
+          value={"Click here to copy To clipBored"}
+        />
+      )}
     </div>
   );
 };
